@@ -15,7 +15,7 @@ function ColorSchemesExample() {
         <Container>
           <img src={logo} style={{ width: "100px" }} alt="Logo" />
           <Nav>
-            <Nav.Link href="pointsTable">Points Table</Nav.Link>
+            <Nav.Link href="/">Points Table</Nav.Link>
             <Nav.Link href="createClub">Create Club</Nav.Link>
             <Nav.Link href="addMatch">Add Match</Nav.Link>
             <Nav.Link href="matches">Matches</Nav.Link>

@@ -12,7 +12,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/pointsTable" element={<Points />} />
+        <Route path="/" element={<Points />} />
         <Route path="/createClub" element={<Create />} />
         <Route path="/addMatch" element={<Match />} />
         <Route path="/matches" element={<Schedule />} />

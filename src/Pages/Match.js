@@ -37,17 +37,37 @@ export default function Match() {
     };
 
     const updatedTeams = teams.map((team) => {
-      if (team.name === homeClub) {
+      if (team.clubName === homeClub) {
+        const points =
+          newMatch.homeClubGoals > newMatch.awayClubGoals ? 3 : newMatch.homeClubGoals === newMatch.awayClubGoals ? 1 : 0;
         return {
           ...team,
+          mp: team.mp + 1,
           gf: team.gf + newMatch.homeClubGoals,
           ga: team.ga + newMatch.awayClubGoals,
+          win:
+            newMatch.homeClubGoals > newMatch.awayClubGoals ? team.win + 1 : team.win,
+          lose:
+            newMatch.homeClubGoals < newMatch.awayClubGoals ? team.lose + 1 : team.lose,
+          draw:
+            newMatch.homeClubGoals === newMatch.awayClubGoals ? team.draw + 1 : team.draw,
+          points: team.points + points,
         };
-      } else if (team.name === awayClub) {
+      } else if (team.clubName === awayClub) {
+        const points =
+          newMatch.awayClubGoals > newMatch.homeClubGoals ? 3 : newMatch.awayClubGoals === newMatch.homeClubGoals ? 1 : 0;
         return {
           ...team,
+          mp: team.mp + 1,
           gf: team.gf + newMatch.awayClubGoals,
           ga: team.ga + newMatch.homeClubGoals,
+          win:
+            newMatch.awayClubGoals > newMatch.homeClubGoals ? team.win + 1 : team.win,
+          lose:
+            newMatch.awayClubGoals < newMatch.homeClubGoals ? team.lose + 1 : team.lose,
+          draw:
+            newMatch.homeClubGoals === newMatch.awayClubGoals ? team.draw + 1 : team.draw,
+          points: team.points + points,
         };
       }
       return team;
@@ -66,11 +86,19 @@ export default function Match() {
   };
 
   const handleHomeOption = (event) => {
-    setHomeClub(event.target.value);
+    const selectedHomeClub = event.target.value;
+    if (selectedHomeClub === awayClub) {
+      setAwayClub(""); // Reset awayClub if it is the same as homeClub
+    }
+    setHomeClub(selectedHomeClub);
   };
 
   const handleAwayOption = (event) => {
-    setAwayClub(event.target.value);
+    const selectedAwayClub = event.target.value;
+    if (selectedAwayClub === homeClub) {
+      setHomeClub(""); // Reset homeClub if it is the same as awayClub
+    }
+    setAwayClub(selectedAwayClub);
   };
 
   const isDisabled =
@@ -124,8 +152,8 @@ export default function Match() {
               >
                 <option value="">Choose Home Club</option>
                 {teams.map((team) => (
-                  <option key={team.name} value={team.name}>
-                    {team.name}
+                  <option key={team.clubName} value={team.clubName}>
+                    {team.clubName}
                   </option>
                 ))}
               </select>
@@ -150,8 +178,8 @@ export default function Match() {
               >
                 <option value="">Choose Away Club</option>
                 {teams.map((team) => (
-                  <option key={team.name} value={team.name}>
-                    {team.name}
+                  <option key={team.clubName} value={team.clubName}>
+                    {team.clubName}
                   </option>
                 ))}
               </select>

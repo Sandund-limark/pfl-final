@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Modal from "./Model";
 import "../App.css";
 import pflText from "../Assets/text.png";
 
@@ -10,11 +11,12 @@ export default function Create() {
     const storedTeamData = localStorage.getItem("teamData");
     return storedTeamData ? JSON.parse(storedTeamData) : [];
   });
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     localStorage.setItem("teamData", JSON.stringify(teamData));
   }, [teamData]);
-
 
   useEffect(() => {
     const storedTeamData = localStorage.getItem("teamData");
@@ -22,10 +24,6 @@ export default function Create() {
       setTeamData(JSON.parse(storedTeamData));
     }
   }, []);
-  
-  useEffect(() => {
-    localStorage.setItem("teamData", JSON.stringify(teamData));
-  }, [teamData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,7 +41,8 @@ export default function Create() {
       points: 0,
     };
     setTeamData([...teamData, newTeamData]);
-    alert(`${clubName}! Welcome to PFL 2023. Good luck!`);
+    setModalMessage(`${clubName}! Welcome to PFL 2023. Good luck!`);
+    setShowModal(true);
     setClubName("");
     setColor("");
     setLogo("");
@@ -51,6 +50,10 @@ export default function Create() {
 
   const isDisabled =
     clubName.trim() === "" || color.trim() === "" || logo.trim() === "";
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div>
@@ -123,6 +126,9 @@ export default function Create() {
           </form>
         </div>
       </div>
+      {showModal && (
+        <Modal message={modalMessage} closeModal={closeModal} />
+      )}
     </div>
   );
 }
