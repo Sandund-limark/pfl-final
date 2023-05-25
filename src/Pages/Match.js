@@ -1,13 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import pflText from "../Assets/text.png";
+
 export default function Match() {
   const [homeClub, setHomeClub] = useState("");
   const [homeClubGoals, setHomeClubGoals] = useState(null);
   const [awayClub, setAwayClub] = useState("");
   const [awayClubGoals, setAwayClubGoals] = useState(null);
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    const storedTeamData = localStorage.getItem("teamData");
+    if (storedTeamData) {
+      setTeams(JSON.parse(storedTeamData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("teamData", JSON.stringify(teams));
+  }, [teams]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const newMatch = {
+      homeClub,
+      homeClubGoals: Number(homeClubGoals),
+      awayClub,
+      awayClubGoals: Number(awayClubGoals),
+    };
+
+    const updatedTeams = teams.map((team) => {
+      if (team.name === homeClub) {
+        return {
+          ...team,
+          gf: team.gf + newMatch.homeClubGoals,
+          ga: team.ga + newMatch.awayClubGoals,
+        };
+      } else if (team.name === awayClub) {
+        return {
+          ...team,
+          gf: team.gf + newMatch.awayClubGoals,
+          ga: team.ga + newMatch.homeClubGoals,
+        };
+      }
+      return team;
+    });
+
+    setTeams(updatedTeams);
+
+    setHomeClub("");
+    setHomeClubGoals(null);
+    setAwayClub("");
+    setAwayClubGoals(null);
+
     alert(
       `${homeClub} scored ${homeClubGoals} goals and ${awayClub} scored ${awayClubGoals} goals`
     );
@@ -71,14 +116,11 @@ export default function Match() {
                 onChange={handleHomeOption}
               >
                 <option value="">Choose Home Club</option>
-                <option value="Akela">Akela</option>
-                <option value="Ceros">Ceros</option>
-                <option value="Grizzly">Grizzly</option>
-                <option value="Hydra">Hydra</option>
-                <option value="Raptors">Raptors</option>
-                <option value="Stags">Stags</option>
-                <option value="Tusker">Tusker</option>
-                <option value="Valiente">Valiente</option>
+                {teams.map((team) => (
+                  <option key={team.name} value={team.name}>
+                    {team.name}
+                  </option>
+                ))}
               </select>
               <i></i>
             </div>
@@ -100,14 +142,11 @@ export default function Match() {
                 onChange={handleAwayOption}
               >
                 <option value="">Choose Away Club</option>
-                <option value="Akela">Akela</option>
-                <option value="Ceros">Ceros</option>
-                <option value="Grizzly">Grizzly</option>
-                <option value="Hydra">Hydra</option>
-                <option value="Raptors">Raptors</option>
-                <option value="Stags">Stags</option>
-                <option value="Tusker">Tusker</option>
-                <option value="Valiente">Valiente</option>
+                {teams.map((team) => (
+                  <option key={team.name} value={team.name}>
+                    {team.name}
+                  </option>
+                ))}
               </select>
               <i></i>
             </div>

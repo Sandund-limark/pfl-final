@@ -1,16 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../App.css";
 import pflText from "../Assets/text.png";
 
 export default function Create() {
   const [clubName, setClubName] = useState("");
+  const [color, setColor] = useState("");
+  const [logo, setLogo] = useState("");
+  const [teamData, setTeamData] = useState([]);
+
+  useEffect(() => {
+    const storedTeamData = localStorage.getItem("teamData");
+    if (storedTeamData) {
+      setTeamData(JSON.parse(storedTeamData));
+    }
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("teamData", JSON.stringify(teamData));
+  }, [teamData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`${clubName}! Welcome to PFL 2023. GoodLuck!`);
+    const newTeamData = {
+      clubName: clubName,
+      color: color,
+      logo: logo,
+      mp: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      ga: 0,
+      gf: 0,
+      gd: 0,
+      points: 0,
+    };
+    setTeamData([...teamData, newTeamData]);
+    alert(`${clubName}! Welcome to PFL 2023. Good luck!`);
+    setClubName("");
+    setColor("");
+    setLogo("");
   };
 
-  const isDisabled = clubName.trim() === "";
+  const isDisabled =
+    clubName.trim() === "" || color.trim() === "" || logo.trim() === "";
+
   return (
     <div>
       <img
@@ -53,19 +86,29 @@ export default function Create() {
                 type="text"
                 value={clubName}
                 onChange={(e) => setClubName(e.target.value)}
-                required="required"
+                required
               />
               <span>Club Name</span>
               <i></i>
             </div>
             <div className="createTeam">
-              <input type="text" required="required" />
+              <input
+                type="text"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                required
+              />
               <span>Color</span>
               <i></i>
             </div>
             <div className="createTeam">
-              <input type="text" required="required" />
-              <span>Home Ground</span>
+              <input
+                type="text"
+                value={logo}
+                onChange={(e) => setLogo(e.target.value)}
+                required
+              />
+              <span>logo</span>
               <i></i>
             </div>
             <input type="submit" value="Create Team" disabled={isDisabled} />
