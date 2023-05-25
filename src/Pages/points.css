@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
+
+body {
+    font-family: 'Lora', serif;
+}
+
+.main-table {
+    margin-bottom   : 15px;
+    display         : flex;
+    align-items     : center;
+    background-color: rgb(27, 129, 219);
+    min-height      : 6vh;
+    width           : 140vh;
+    border-radius   : 50px;
+    font-weight     : 600;
+}
+
+.main-table .pos {
+    margin-left: 115px;
+}
+
+.main-table .name {
+    margin-left : 95px;
+    /* min-width: 120px; */
+}
+
+.main-table .played {
+    margin-left: 75px;
+}
+
+.main-table .win {
+    margin-left: 90px;
+}
+
+.main-table .draw {
+    margin-left: 100px;
+}
+
+.main-table .lost {
+    margin-left: 85px;
+}
+
+.main-table .gf {
+    margin-left : 90px;
+    /* min-width: 20px; */
+}
+
+.main-table .ga {
+    margin-left : 92px;
+    /* min-width: 20px; */
+}
+
+.main-table .gd {
+    margin-left : 92px;
+    /* min-width: 20px; */
+}
+
+.main-table .points {
+    margin-left : 100px;
+    /* min-width: 20px; */
+}
+
+
+
+.table {
+    margin-top      : 0px;
+    display         : flex;
+    align-items     : center;
+    background-color: rgb(2, 19, 33);
+    min-height      : 6vh;
+    width           : 140vh;
+    border-radius   : 50px;
+    color           : #fff;
+}
+
+.table .pos {
+    margin-left: 115px;
+}
+
+.table .name {
+    margin-left: 95px;
+    min-width  : 170px;
+}
+
+.table .played {
+    margin-left: 10px;
+}
+
+.table .win {
+    margin-left: 105px;
+}
+
+.table .draw {
+    margin-left: 100px;
+}
+
+.table .lost {
+    margin-left: 90px;
+}
+
+.table .gf {
+    margin-left: 90px;
+    min-width  : 20px;
+}
+
+.table .ga {
+    margin-left: 92px;
+    min-width  : 20px;
+}
+
+.table .gd {
+    margin-left: 92px;
+    min-width  : 20px;
+}
+
+.table .points {
+    margin-left: 100px;
+    min-width  : 20px;
+}
