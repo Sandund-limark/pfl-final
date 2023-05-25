@@ -6,7 +6,15 @@ export default function Create() {
   const [clubName, setClubName] = useState("");
   const [color, setColor] = useState("");
   const [logo, setLogo] = useState("");
-  const [teamData, setTeamData] = useState([]);
+  const [teamData, setTeamData] = useState(() => {
+    const storedTeamData = localStorage.getItem("teamData");
+    return storedTeamData ? JSON.parse(storedTeamData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("teamData", JSON.stringify(teamData));
+  }, [teamData]);
+
 
   useEffect(() => {
     const storedTeamData = localStorage.getItem("teamData");

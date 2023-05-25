@@ -69,7 +69,7 @@ export default function Points() {
                 />
                 {team.clubName}
               </p>
-              <p className="card-header played">{team.played}</p>
+              <p className="card-header played">{team.mp}</p>
               <p className="card-header win">{team.win}</p>
               <p className="card-header draw">{team.draw}</p>
               <p className="card-header lost">{team.lose}</p>
