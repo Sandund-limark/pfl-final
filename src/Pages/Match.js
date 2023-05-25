@@ -6,7 +6,14 @@ export default function Match() {
   const [homeClubGoals, setHomeClubGoals] = useState(null);
   const [awayClub, setAwayClub] = useState("");
   const [awayClubGoals, setAwayClubGoals] = useState(null);
-  const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState(() => {
+    const storedTeamData = localStorage.getItem("teamData");
+    return storedTeamData ? JSON.parse(storedTeamData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("teamData", JSON.stringify(teams));
+  }, [teams]);
 
   useEffect(() => {
     const storedTeamData = localStorage.getItem("teamData");
