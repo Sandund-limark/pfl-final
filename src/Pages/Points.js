@@ -21,9 +21,9 @@ export default function Points() {
       const parsedTeamData = JSON.parse(storedTeamData);
       const sortedTeamData = parsedTeamData.sort((a, b) => {
         if (b.points !== a.points) {
-          return b.points - a.points; 
+          return b.points - a.points;
         } else {
-          return b.gf - b.ga - (a.gf - a.ga); 
+          return b.gf - b.ga - (a.gf - a.ga);
         }
       });
 
@@ -60,18 +60,18 @@ export default function Points() {
             }}
           />
           <div style={{ marginTop: "50px" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "15px" }}>
               <div className="main-table">
                 <p className="card-header pos">Pos</p>
                 <p className="card-header name">Club Name</p>
-                <p className="card-header played">MP</p>
-                <p className="card-header win">W</p>
-                <p className="card-header name">D</p>
-                <p className="card-header name">L</p>
-                <p className="card-header name">GF</p>
-                <p className="card-header name">GA</p>
-                <p className="card-header name">+/-</p>
-                <p className="card-header name">Points</p>
+                <p className="card-header">MP</p>
+                <p className="card-header">W</p>
+                <p className="card-header">D</p>
+                <p className="card-header">L</p>
+                <p className="card-header">GF</p>
+                <p className="card-header">GA</p>
+                <p className="card-header">+/-</p>
+                <p className="card-header">Points</p>
               </div>
             </div>
             {teamData.map((team, index) => (
@@ -95,14 +95,14 @@ export default function Points() {
                     />
                     {team.clubName}
                   </p>
-                  <p className="card-header played">{team.mp}</p>
-                  <p className="card-header win">{team.win}</p>
-                  <p className="card-header draw">{team.draw}</p>
-                  <p className="card-header lost">{team.lose}</p>
-                  <p className="card-header gf">{team.gf}</p>
-                  <p className="card-header ga">{team.ga}</p>
-                  <p className="card-header gd">{team.gf - team.ga}</p>
-                  <p className="card-header points">{team.points}</p>
+                  <p className="card-header">{team.mp}</p>
+                  <p className="card-header">{team.win}</p>
+                  <p className="card-header">{team.draw}</p>
+                  <p className="card-header">{team.lose}</p>
+                  <p className="card-header">{team.gf}</p>
+                  <p className="card-header">{team.ga}</p>
+                  <p className="card-header">{team.gf - team.ga}</p>
+                  <p className="card-header">{team.points}</p>
                 </div>
               </div>
             ))}
