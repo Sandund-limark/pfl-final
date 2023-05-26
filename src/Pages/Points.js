@@ -13,7 +13,7 @@ import logo8 from "../Assets/valiente.PNG";
 
 export default function Points() {
   const [teamData, setTeamData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedTeamData = localStorage.getItem("teamData");
@@ -21,13 +21,12 @@ export default function Points() {
       const parsedTeamData = JSON.parse(storedTeamData);
       const sortedTeamData = parsedTeamData.sort((a, b) => {
         if (b.points !== a.points) {
-          return b.points - a.points; // Sort by points
+          return b.points - a.points; 
         } else {
-          return b.gf - b.ga - (a.gf - a.ga); // Sort by goal difference (GD)
+          return b.gf - b.ga - (a.gf - a.ga); 
         }
       });
 
-      // Simulate loading for 3 seconds
       setTimeout(() => {
         setTeamData(sortedTeamData);
         setLoading(false);
