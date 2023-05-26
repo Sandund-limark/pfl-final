@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Modal from "./Model";
 import "../App.css";
 import pflText from "../Assets/text.png";
 
@@ -11,8 +10,6 @@ export default function Create() {
     const storedTeamData = localStorage.getItem("teamData");
     return storedTeamData ? JSON.parse(storedTeamData) : [];
   });
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     localStorage.setItem("teamData", JSON.stringify(teamData));
@@ -41,8 +38,7 @@ export default function Create() {
       points: 0,
     };
     setTeamData([...teamData, newTeamData]);
-    setModalMessage(`${clubName}! Welcome to PFL 2023. Good luck!`);
-    setShowModal(true);
+    alert(`${clubName}! Welcome to PFL 2023. Good luck!`);
     setClubName("");
     setColor("");
     setLogo("");
@@ -50,10 +46,6 @@ export default function Create() {
 
   const isDisabled =
     clubName.trim() === "" || color.trim() === "" || logo.trim() === "";
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <div>
@@ -109,7 +101,7 @@ export default function Create() {
                 onChange={(e) => setColor(e.target.value)}
                 required
               />
-              <span>Color</span>
+              <span>Team Color</span>
               <i></i>
             </div>
             <div className="createTeam">
@@ -119,16 +111,13 @@ export default function Create() {
                 onChange={(e) => setLogo(e.target.value)}
                 required
               />
-              <span>logo</span>
+              <span>Team Logo</span>
               <i></i>
             </div>
             <input type="submit" value="Create Team" disabled={isDisabled} />
           </form>
         </div>
       </div>
-      {showModal && (
-        <Modal message={modalMessage} closeModal={closeModal} />
-      )}
     </div>
   );
 }
