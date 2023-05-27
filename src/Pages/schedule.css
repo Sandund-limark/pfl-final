@@ -10,15 +10,15 @@
 }
 
 .home-club img {
-    margin-left: 40px;
+    margin-left: -50px;
 }
 
 .home-club p {
     color      : #fff;
     margin-top : 15px;
-    margin-left: 40px;
+    margin-left: 10px;
     font-size  : 40px;
-    min-width: 150px;
+    min-width  : 150px;
 }
 
 .away-club {
@@ -35,13 +35,12 @@
 .away-club p {
     color       : #fff;
     margin-top  : 15px;
-    margin-right: 40px;
+    margin-right: 0px;
     font-size   : 40px;
-    min-width: 150px; 
-
+    min-width   : 150px;
 }
 
 
 .away-club img {
-    margin-right: 40px;
+    margin-right: -30px;
 }

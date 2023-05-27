@@ -41,11 +41,13 @@ export default function Create() {
         </h1>
       </div>
       {matchSchedule.map((x) => {
+        const isResultAvailable = x.hGoals !== "" || x.aGoals !== "";
+
         return (
           <>
             <div
               style={{
-                backgroundColor: "#0d446f",
+                backgroundColor: isResultAvailable ? "green" : "#0d446f",
                 maxWidth: "1400px",
                 margin: "0 auto",
                 borderRadius: "20px",
@@ -73,31 +75,15 @@ export default function Create() {
                     alt="Logo"
                   />
                   <p>{x.homeClub}</p>
-                  <img
-                    src={logo9}
-                    style={{
-                      width: "70px",
-                      marginLeft: "140px",
-                      marginBottom: "2px",
-                    }}
-                    alt="Logo"
-                  />
+                  <p>{x.hGoals}</p>
                 </div>
                 <h1 style={{ color: "white" }}>Vs</h1>
                 <div
                   className="away-club"
                   style={{ display: "flex", justifyContent: "flex-end" }}
                 >
-                  <img
-                    src={logo9}
-                    style={{
-                      width: "70px",
-                      marginRight: "137px",
-                      marginBottom: "2px",
-                    }}
-                    alt="Logo"
-                  />
-                  <p>{x.awayClub}</p>
+                  <p>{x.aGoals}</p>
+                  <p className="score">{x.awayClub}</p>
                   <img
                     src={x.awayLogo}
                     style={{
@@ -163,72 +149,3 @@ export default function Create() {
     </div>
   );
 }
-
-// import pflText from "../Assets/text.png";
-// import React, { useState } from "react";
-// export default function Create() {
-//   const [formData, setFormData] = useState({ name: "", email: "" });
-//   const [tableData, setTableData] = useState([]);
-
-//   const handleInputChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     setTableData((prevTableData) => [...prevTableData, formData]);
-//     setFormData({ name: "", email: "" });
-//   };
-//   return (
-//     <div>
-//       <img
-//         src={pflText}
-//         alt="Logo"
-//         style={{
-//           display: "block",
-//           margin: "auto",
-//           width: "300px",
-//           marginTop: "20px",
-//         }}
-//       />
-//       <form onSubmit={handleSubmit}>
-//         <label>
-//           Name:
-//           <input
-//             type="text"
-//             name="name"
-//             value={formData.name}
-//             onChange={handleInputChange}
-//           />
-//         </label>
-//         <label>
-//           Email:
-//           <input
-//             type="email"
-//             name="email"
-//             value={formData.email}
-//             onChange={handleInputChange}
-//           />
-//         </label>
-//         <button type="submit">Submit</button>
-//       </form>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Name</th>
-//             <th>Email</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {tableData.map((rowData, index) => (
-//             <tr key={index}>
-//               <td>{rowData.name}</td>
-//               <td>{rowData.email}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }

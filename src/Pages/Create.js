@@ -24,9 +24,11 @@ export default function Create() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const capitalizedClubName = clubName.toUpperCase();
+    const modifiedColor = "#" + color.trim();
     const newTeamData = {
-      clubName: clubName,
-      color: color,
+      clubName: capitalizedClubName,
+      color: modifiedColor,
       logo: logo,
       mp: 0,
       win: 0,
@@ -38,7 +40,7 @@ export default function Create() {
       points: 0,
     };
     setTeamData([...teamData, newTeamData]);
-    alert(`${clubName}! Welcome to PFL 2023. Good luck!`);
+    alert(`${capitalizedClubName}! Welcome to PFL 2023. Good luck!`);
     setClubName("");
     setColor("");
     setLogo("");

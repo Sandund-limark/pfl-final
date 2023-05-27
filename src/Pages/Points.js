@@ -14,6 +14,7 @@ import logo8 from "../Assets/valiente.PNG";
 export default function Points() {
   const [teamData, setTeamData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isGreenColor, setIsGreenColor] = useState(false); // Controlling the color
 
   useEffect(() => {
     const storedTeamData = localStorage.getItem("teamData");
@@ -33,6 +34,10 @@ export default function Points() {
       }, 3000);
     }
   }, []);
+
+  useEffect(() => {
+    setIsGreenColor(false); // Set isGreenColor to true when the useState is true
+  }, [isGreenColor]);
 
   return (
     <div>
@@ -79,11 +84,11 @@ export default function Points() {
                 style={{ display: "flex", justifyContent: "center" }}
                 key={index}
               >
-                <div className="table">
+                <div className={`table ${isGreenColor && index < 4 ? "green-row" : ""}`}>
                   <p className="card-header pos">{index + 1}</p>
                   <p className="card-header name">
                     <img
-                      src={getLogoByIndex(index + 1)}
+                      src={getLogoByTeam(team.clubName)}
                       style={{
                         width: "44px",
                         marginRight: "10px",
@@ -113,23 +118,23 @@ export default function Points() {
   );
 }
 
-function getLogoByIndex(index) {
-  switch (index) {
-    case 1:
+function getLogoByTeam(clubName) {
+  switch (clubName) {
+    case "AKELA":
       return logo1;
-    case 2:
+    case "CEROS":
       return logo2;
-    case 3:
+    case "GRIZZLY":
       return logo3;
-    case 4:
+    case "HYDRA":
       return logo4;
-    case 5:
+    case "RAPTORS":
       return logo5;
-    case 6:
+    case "STAGS":
       return logo6;
-    case 7:
+    case "TUSKER":
       return logo7;
-    case 8:
+    case "VALIENTE":
       return logo8;
     default:
       return null;
